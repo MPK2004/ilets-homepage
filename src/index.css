@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@keyframes text-gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-plane {
+  0% {
+    transform: translate(0, 0) rotate(-15deg);
+  }
+  50% {
+    transform: translate(10px, -20px) rotate(-25deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-15deg);
+  }
+}
+
+.animate-float {
+  animation: float-plane 6s ease-in-out infinite;
+}
+@layer theme {
+  :root {
+    --font-sans: 'Poppins', sans-serif;
+  }
+}
+
+@layer base {
+      html {
+    scroll-behavior: smooth; /* Add this line */
+  }
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* This is the new container for our aurora effect */
+.aurora-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* We now target the pseudo-elements of this new container */
+.aurora-background::before, .aurora-background::after {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  filter: blur(100px);
+  z-index: -1;
+}
+
+.aurora-background::before {
+  top: -20%;
+  left: -20%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%);
+  animation: float 15s ease-in-out infinite;
+}
+
+.aurora-background::after {
+  bottom: -20%;
+  right: -20%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%);
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(100px, 50px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0c0a09; }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(59, 130, 246, 0.5);
+  border-radius: 10px;
+  border: 2px solid #0c0a09;
+}
